@@ -55,7 +55,7 @@ Set up your environment by sourcing the following file.
 ```
 . ~/ros2_galactic/install/local_setup.bash
 ```
-(for convenient, add '. `~`/ros2_galactic/install/local_setup.bash' at `~`/.bashrc)
+(for convenient, add '. \~/ros2_galactic/install/local_setup.bash' at \~/.bashrc)
 
 6. try some examples
 
@@ -70,3 +70,57 @@ terminal 2
 . ~/ros2_galactic/ros2-linux/setup.bash
 ros2 run demo_nodes_py listener
 ```
+
+## creating a workspace
+1. source ROS2 environment
+```
+source /opt/ros/galactic/setup.bash
+```
+
+2. create a new directory
+```
+mkdir -p ~/${dir_name}_ws/src
+cd ~/${dir_name}_ws/src
+```
+
+3. clone a sample repo
+```
+git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
+```
+`turtlesim` package will be use for this tutorial.
+
+4. resolve dependencies
+
+```
+cd .. (move to the upper dir of src e.g. ${dir_name}_ws)
+rosdep install -i --from-path src --rosdistro galactic -y
+```
+consol will return
+`#All required rosdeps installed successfully`
+
+5. build the workspace with colcon
+at directoty ${dir_name}_ws, use this command
+```
+colcon build
+```
+then you will see that colcon has created new directories
+`build install log src`
+
+6. source the overlay
+before sourcing overlay, open a new terminal to avoid complex issues.
+```
+source /opt/ros/galactic/setup.bash
+cd ~/${dir_name}_ws
+. install/local_setup.bash
+```
+now you can run `turtlesim` package from the overlay
+```
+ros2 run turtlesim turtlesim_node
+```
+
+7. modify the overlay
+modify `turtle_frame.cpp` in `.../src/turtlesim` change the value `"TurtleSim"` to `"MyTurtleSim"` at line 52, and save the file. and return to first terminal where you ran `colcon build` eariler and run it again. and run `ros2 run turtlesim turtlesim_node` at the second terminal where overlay is sourced. then you will see the title bar on the turtlesim windows now says `"MyTurtleSim"`.
+
+## create first ROS2 package
+
+## writing a simple publisher and subscriber (C++ and python)
