@@ -1,9 +1,9 @@
 # ros2
-
+왜 빌드가 안되는것임?? ㅅㅂ
 ## install and build
 https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
 
-1. system setup
+1. system setup   
 1-1. set locale   
 ```
 locale  # check for UTF-8
@@ -40,8 +40,8 @@ rosdep update
 ...
 ```
 
-4. build the code in workspace
-4-1. ensure that you do not have `source /opt/ros/${ROS_DISTRO}/setup.bash` in your `.bashrc`
+4. build the code in workspace   
+ensure that you do not have `source /opt/ros/${ROS_DISTRO}/setup.bash` in your `.bashrc`
 ```
 cd ~/ros2_galactic/
 colcon build --symlink-install
@@ -61,13 +61,13 @@ Set up your environment by sourcing the following file.
 
 terminal 1
 ```
-. ~/ros2_galactic/ros2-linux/setup.bash
+. ~/ros2_galactic/install/local_setup.bash
 ros2 run demo_nodes_cpp talker
 ```
 
 terminal 2
 ```
-. ~/ros2_galactic/ros2-linux/setup.bash
+. ~/ros2_galactic/install/local_setup.bash
 ros2 run demo_nodes_py listener
 ```
 
@@ -95,7 +95,7 @@ git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
 cd .. (move to the upper dir of src e.g. ${dir_name}_ws)
 rosdep install -i --from-path src --rosdistro galactic -y
 ```
-consol will return
+consol will return   
 `#All required rosdeps installed successfully`
 
 5. build the workspace with colcon
