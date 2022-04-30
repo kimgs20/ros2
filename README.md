@@ -1,7 +1,10 @@
 # ros2
-왜 빌드가 안되는것임?? ㅅㅂ
+1. building ROS2 on Ubuntu Linux: download and build from ros2.repos
+2. installing ROS2 on Ubuntu Linux: install ROS 2 on Ubuntu Linux from a pre-built binary package
+
 ## install and build
 https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
+\*tip: do not use anaconda virtual env. if colcon build in venv, build will fail due to cannot import some modules.
 
 1. system setup   
 1-1. set locale   
@@ -84,6 +87,7 @@ cd ~/${dir_name}_ws/src
 ```
 
 3. clone a sample repo
+in src directory,
 ```
 git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
 ```
@@ -95,6 +99,7 @@ git clone https://github.com/ros/ros_tutorials.git -b galactic-devel
 cd .. (move to the upper dir of src e.g. ${dir_name}_ws)
 rosdep install -i --from-path src --rosdistro galactic -y
 ```
+rosdep command will make `/opt/ros/galactic/...` and resolve dependencies
 consol will return   
 `#All required rosdeps installed successfully`
 
@@ -105,6 +110,7 @@ colcon build
 ```
 then you will see that colcon has created new directories
 `build install log src`
+The `install` directory is where your workspace’s setup files are, which you can use to source your overlay.
 
 6. source the overlay
 before sourcing overlay, open a new terminal to avoid complex issues.

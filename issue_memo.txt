@@ -1,44 +1,29 @@
-1. colcon build fail
-the environment variable CMAKE_PREFIX_PATH doesn't exist
+1. colcon build fail (for build ROS2)
+ModuleNotFoundError: No module named 'catkin_pkg'
+...
+  1 package failed: ament_cmake_core
 
+sol) do not build on anaconda venv
 
-1. colcon build fail
-    Could not find a package configuration file provided by "ament_cmake" with
-    any of the following names:
+2. colcon build fail (for build package)
+CMake Error at CMakeLists.txt:12 (find_package):
+  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "ament_cmake", but CMake did not find one.
 
-        ament_cmakeConfig.cmake
-        ament_cmake-config.cmake
+  Could not find a package configuration file provided by "ament_cmake" with
+  any of the following names:
 
-sol) source /opt/ros/<distro>/setup.bash
+    ament_cmakeConfig.cmake
+    ament_cmake-config.cmake
 
-2. colcon build fail
-    Could not find a package configuration file provided by
-    "rosidl_default_generators" with any of the following names:
+  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+  "ament_cmake_DIR" to a directory containing one of the above files.  If
+  "ament_cmake" provides a separate development package or SDK, be sure it
+  has been installed.
 
-        rosidl_default_generatorsConfig.cmake
-        rosidl_default_generators-config.cmake
+sol) source ~/ros2_galactic/install/local_setup.bash
 
-sol) . ~/ros2_galactic/install/local_setup.bash
+3. ros2: command not found
 
-3. colcon build fail
-
-    File "/home/<user_name>/ros2_galactic/install/rosidl_adapter/lib/python3.8/site-packages/rosidl_adapter/resource/__init__.py", line 19, in <module>
-      import em
-
-  ModuleNotFoundError: No module named 'em'
-
-Call Stack (most recent call first):
-  /opt/ros/galactic/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:130 (rosidl_adapt_interfaces)
-  CMakeLists.txt:24 (rosidl_generate_interfaces)
-
-sol) pip install em
-
-4. colcon build fail
-
-  AttributeError: 'NoneType' object has no attribute 'shutdown'
-
-Call Stack (most recent call first):
-  /opt/ros/galactic/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:130 (rosidl_adapt_interfaces)
-  CMakeLists.txt:24 (rosidl_generate_interfaces)
-
-sol) ???
+sol) source /opt/ros/galactic/setup.bash
