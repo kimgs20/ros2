@@ -4,7 +4,7 @@
 
 ## install and build
 https://docs.ros.org/en/galactic/Installation/Ubuntu-Development-Setup.html
-\*tip: do not use anaconda virtual env. if colcon build in venv, build will fail due to cannot import some modules.
+* tip: do not use anaconda virtual env. if colcon build in venv, build will fail due to cannot import some modules.
 
 1. system setup   
 1-1. set locale   

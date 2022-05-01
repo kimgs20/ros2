@@ -22,8 +22,8 @@ CMake Error at CMakeLists.txt:12 (find_package):
   "ament_cmake" provides a separate development package or SDK, be sure it
   has been installed.
 
-sol) source ~/ros2_galactic/install/local_setup.bash
+sol) source /opt/ros/galactic/setup.bash or . ~/ros2_galactic/install/local_setup.bash
 
 3. ros2: command not found
 
-sol) source /opt/ros/galactic/setup.bash
+sol) . ~/ros2_galactic/install/local_setup.bash
