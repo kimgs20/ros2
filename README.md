@@ -79,6 +79,7 @@ ros2 run demo_nodes_py listener
 ```
 source /opt/ros/galactic/setup.bash
 ```
+for convenient, `echo "source /opt/ros/<ros-distro>/setup.bash" >> ~/.bashrc`
 
 2. create a new directory
 ```

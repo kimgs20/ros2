@@ -1,0 +1,2 @@
+22-05-01
+user workspace에서 작성한 src를 colcon build 하고 사용하려면 해당 workspace에 있는 ./install/setup.bash를 source 해야함! local_setup.bash가 아님!
