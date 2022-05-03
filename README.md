@@ -129,5 +129,75 @@ ros2 run turtlesim turtlesim_node
 modify `turtle_frame.cpp` in `.../src/turtlesim` change the value `"TurtleSim"` to `"MyTurtleSim"` at line 52, and save the file. and return to first terminal where you ran `colcon build` eariler and run it again. and run `ros2 run turtlesim turtlesim_node` at the second terminal where overlay is sourced. then you will see the title bar on the turtlesim windows now says `"MyTurtleSim"`.
 
 ## create first ROS2 package
+1. navigate to ${dir_name}_ws/src and run the package creation command:
+```
+ros2 pkg create --build-type ament_cmake cpp_pubsub_tuto
+```
+navigate to ${dir_name}_ws/src/cpp_pubsub_tuto/src
 
-## writing a simple publisher and subscriber (C++ and python)
+2. write the publisher node
+2-1. write new file `publisher_member_function.cpp`.
+```
+#include <chrono>
+#include ...
+...
+    return 0;
+}
+```
+2-2. add dependencies   
+open `package.xml` and add the lines:
+```
+<depend>rclcpp</depend>
+<depend>std_msgs</depend>
+```
+   
+2-3. CMakeLists.txt   
+open `CMakeLists.txt` and add the lines below `find_package(ament_cmake REQUIRED)`:
+```
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+```
+and add the executable and name it `talker` so you can run your node using `ros2 run`:
+```
+add_executable(talker src/publisher_member_function.cpp)
+ament_target_dependencies(talker rclcpp std_msgs)
+```
+add `install(TARGETS...)` so `ros2 run` can find your executable:
+```
+install(TARGETS
+    talker
+    DESTINATION lib/${PROJECT_NAME})
+```
+   
+3. write the subscriber node
+3-1. 
+
+3-2. you don't need to edit `package.xml`
+
+3-3. CMakeLists.txt
+add the executable and target for the subscriber node
+```
+add_executable(listener src/subscriber_member_function.cpp)
+ament_target_dependencies(listener rclcpp std_msgs)
+
+install(TARGETS
+  talker
+  listener
+  DESTINATION lib/${PROJECT_NAME})
+```
+
+4. build and run
+run `rosdep` in the root of your workspace (`${dir_name}_ws`) to check for missing dependencies before building:
+```
+rosdep install -i --from-path src --rosdistro galactic -y
+```
+
+in the root(`${dir_name}_ws`), build your new packages:
+```
+colcon build --packages-select cpp_pubsub_tuto
+```
+
+open a new terminal, naviagte to `${dir_name}_ws`, and source the setup files
+```
+. install/setup.bash
+```
