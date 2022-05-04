@@ -27,3 +27,9 @@ sol) source /opt/ros/galactic/setup.bash or . ~/ros2_galactic/install/local_setu
 3. ros2: command not found
 
 sol) . ~/ros2_galactic/install/local_setup.bash
+
+4. colcon build fail (python)
+
+setup.py install is deprecated. Use build and pip and other standards-based tools.
+
+sol) pip install setuptools==58.2.0 (originally was 60.7.0)

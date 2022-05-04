@@ -129,7 +129,8 @@ ros2 run turtlesim turtlesim_node
 modify `turtle_frame.cpp` in `.../src/turtlesim` change the value `"TurtleSim"` to `"MyTurtleSim"` at line 52, and save the file. and return to first terminal where you ran `colcon build` eariler and run it again. and run `ros2 run turtlesim turtlesim_node` at the second terminal where overlay is sourced. then you will see the title bar on the turtlesim windows now says `"MyTurtleSim"`.
 
 ## create first ROS2 package
-1. navigate to ${dir_name}_ws/src and run the package creation command:
+### C++
+1. navigate to `${dir_name}_ws/src` and run the package creation command:
 ```
 ros2 pkg create --build-type ament_cmake cpp_pubsub_tuto
 ```
@@ -200,4 +201,95 @@ colcon build --packages-select cpp_pubsub_tuto
 open a new terminal, naviagte to `${dir_name}_ws`, and source the setup files
 ```
 . install/setup.bash
+```
+
+### Python
+1. navigate to `${dir_name}_ws/src` and run the package creation command:
+```
+ros2 pkg create --build-type ament_python py_pubsub_tuto
+```
+
+2. write the publisher node
+2-1. write new file `${dir_name}_ws/src/py_pubsub_tuto/py_pubsub_tuto/publisher_member_function.py`.
+```
+import rclpy
+from ...
+...
+if __name__ == '__main__':
+    main()
+```
+
+2-2. add dependencies   
+navigate one level back to the `${dir_name}_ws/src/py_subpub_tuto` directory, where `setup.py`, `setup.cfg` and `<license>` tags. and add the dependencies at `package.xml`:
+```
+<exec_depend>rclpy</exec_depend>
+<exec_depend>std_msgs</exec_depend>
+```
+
+2-3. add entry point   
+open the `setup.py` file and match maintainer, maintainer_email, description and license fields to your `package.xml`.   
+add the follwing line within the `console_scripts` brackets of the `entry_points` fields:
+```
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub_tuto.publisher_member_function:main'
+        ],
+},
+```
+
+2-4. check setup.cfg   
+contents of the `setup.cfg` file should be correctly populated automatically.
+```
+[develop]
+script_dir=$base/lib/py_pubsub_tuto
+[install]
+install_scripts=$base/lib/py_pubsub_tuto
+```
+* typo in document: script-dir, install-script
+
+3. write subscriber node
+3-1. write new file `${dir_name}_ws/src/py_pubsub_tuto/py_pubsub_tuto/subscriber_member_function.py`
+```
+import rclpy
+from ...
+...
+if __name__ == '__main_':
+    main()
+```
+
+3-2. add an entry point
+```
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub_tuto.publisher_member_function:main',
+                'listener = py_pubsub_tuto.subscriber_member_function:main',
+        ],
+},
+```
+4. build and run
+python packages of ROS 2 are need to be build!   
+in the root of your workspace to check for missing dependencies before building:
+```
+rosdep install -i --from-path src --rosdistro galactic -y
+```
+
+build your new packge:
+```
+colcon build --packages-select py_pubsub_tuto
+```
+
+source the setup file:
+```
+. install/setup.py
+```
+
+run the talker node:
+```
+ros2 run py_pubsub_tuto talker
+```
+(command name was set in setup.py)   
+   
+run the listner node:
+```
+ros2 run py_pubsub_tuto listner
 ```
